@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .list{
+        display: inline-block;
+        width:45%;
+        vertical-align:top;
+    }
+    .addBook{
+        display:inline-block;
+        width:45%;
+        vertical-align:top;
+        text-align:center;
+        
+    }
+    .addBook form{
+        padding-right:20%;
+        display:block;
+        text-align:right;
+    }
+    table{
+        margin:10px;
+    }
+</style>
+<body>
+    <div class="addBook">
+        <h1>Add a Book</h1>
+        <form action="/add_book" method="post">{% csrf_token %}
+            <label for="title">Title</label>
+            <input type="text" name="title"><p></p>
+            <label style="vertical-align:top" for="description">Description</label>
+            <input type="text" name="description" style="height:100px;"><p></p>
+            <button>Add</button>
+        </form>
+        <a href="/authors">All Authors</a>
+    </div>
+    <div class="list"> 
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in Books %}
+                <tr>
+                    <th>{{a.id}}</th>
+                    <th>{{a}}</th>
+                    <th><a href="/view/books/{{a.id}}">View</a></th>
+                <tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
